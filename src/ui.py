@@ -1132,7 +1132,7 @@ class KPMainWindow(QtWidgets.QMainWindow):
         f = mb.addMenu('&File')
         self.fa = f.addAction('New',                        self.newMap, QKeySequence("Ctrl+N"))
         self.fb = f.addAction('Open...',                    self.openMap, QKeySequence("Ctrl+O"))
-        self.fc = f.addAction('Open Recent')                #
+        #self.fc = f.addAction('Open Recent')                #
         f.addSeparator()
         self.fd = f.addAction('Save',                       self.saveMap, QKeySequence("Ctrl+S"))
         self.fe = f.addAction('Save As...',                 self.saveMapAs, QKeySequence("Ctrl+Shift+S"))
@@ -1146,7 +1146,7 @@ class KPMainWindow(QtWidgets.QMainWindow):
 
         e = mb.addMenu('Edit')
         self.ea = e.addAction('Copy',                       self.copy, QKeySequence.Copy)
-        self.eb = e.addAction('Cut')                        # X
+        #self.eb = e.addAction('Cut')                        # X
         self.ec = e.addAction('Paste',                      self.paste, QKeySequence.Paste)
         e.addSeparator()
         self.ed = e.addAction('Select All',                 self.selectAll, QKeySequence.SelectAll)
