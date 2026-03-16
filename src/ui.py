@@ -1201,6 +1201,10 @@ class KPMainWindow(QtWidgets.QMainWindow):
         doodadAction.setShortcut(QKeySequence("Ctrl+3"))
         w.addAction(doodadAction)
 
+        pathNodeAction = self.pathNodeDock.toggleViewAction()
+        pathNodeAction.setShortcut(QKeySequence("Ctrl+4"))
+        w.addAction(pathNodeAction)
+
         h = mb.addMenu('Help')
         self.ha = h.addAction('About Koopatlas',            self.aboutDialog)
         self.hb = h.addAction('Koopatlas Documentation',    self.goToHelp)
