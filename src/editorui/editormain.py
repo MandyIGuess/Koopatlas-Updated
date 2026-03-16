@@ -764,6 +764,10 @@ class KPEditorWidget(QtWidgets.QGraphicsView):
 
                 self.scene().clearSelection()
 
+                if isinstance(itemsUnder[0], (KPEditorNode, KPEditorPath)):
+                    QtWidgets.QGraphicsView.mousePressEvent(self, event)
+                    return
+
                 kLayer = itemsUnder[0]._layerRef()
                 if isinstance(kLayer, (KPPathTileLayer, KPPathLayer)):
                     QtWidgets.QGraphicsView.mousePressEvent(self, event)
