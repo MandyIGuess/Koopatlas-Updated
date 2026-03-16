@@ -576,6 +576,11 @@ class KPDoodadSelector(QtWidgets.QWidget):
                 pix = QtGui.QPixmap()
                 pix.load(image)
 
+                # Prevent the user from adding doodads that the game cannot handle
+                if pix.width() > 1024 or pix.height() > 1024:
+                    QtWidgets.QMessageBox.warning(None, 'Warning', 'The doodad you tried to add is too large. Doodads can be no larger than 1024x1024 pixels.')
+                    return
+
                 KP.map.addDoodad(name, pix)
 
     def removeDoodad(self):
