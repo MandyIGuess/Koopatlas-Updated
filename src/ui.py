@@ -175,6 +175,9 @@ class KPPathNodeList(QtWidgets.QWidget):
 
     def removeFolder(self):
         item = self.tree.currentItem()
+        if item is None:
+            return
+
         if not isinstance(item, self.KPPathNodeItem):
             kids = item.takeChildren()
             parent = item.parent()
