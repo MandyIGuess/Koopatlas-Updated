@@ -171,7 +171,7 @@ def _packUnlockSpec(data):
             modeID = 0x80
         else:
             modeID = 0
-        return intsToBytes([one, modeID | count > 8, count & 0xFF])
+        return intsToBytes([one, modeID | count >> 8, count & 0xFF])
 
     elif kind == 'and' or kind == 'or':
         terms = data[1]
