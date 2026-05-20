@@ -157,6 +157,7 @@ class KPWorldTableModel(QtCore.QAbstractTableModel):
                 self.beginRemoveRows(parent, row, row+count-1)
                 for i in range(count):
                     del self.worlds[row]
+                self.currentMap.freeWorldDefKey()
                 self.endRemoveRows()
 
 

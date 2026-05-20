@@ -608,6 +608,10 @@ class KPMap(object):
         else:
             self.version = 1
 
+        # Automatically set next key ID to the existing world count
+        if len(self.worlds) > 0:
+            self.nextWorldKey = len(self.worlds) + 1
+
         self.deleteNullDoodads()
         self.checkDoodadSizes()
 
@@ -657,6 +661,11 @@ class KPMap(object):
     def allocateWorldDefKey(self):
         key = self.nextWorldKey
         self.nextWorldKey += 1
+        return key
+
+    def freeWorldDefKey(self):
+        key = self.nextWorldKey
+        self.nextWorldKey -= 1
         return key
 
     def deleteNullDoodads(self):
