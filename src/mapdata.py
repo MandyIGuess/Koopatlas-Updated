@@ -609,6 +609,7 @@ class KPMap(object):
             self.version = 1
 
         self.deleteNullDoodads()
+        self.checkDoodadSizes()
 
     def _dump(self, mapObj, dest):
         dest['version'] = self.version
@@ -684,6 +685,28 @@ class KPMap(object):
                 self.doodadDefinitions.pop(i)
             else:
                 i += 1
+
+    def checkDoodadSizes(self):
+        """Check all doodads to see if they're too large for the game
+        to handle (larger than 1024x1024px)"""
+
+        doodadDefList = []
+        dispWarning = False
+
+        # Check for doodads too large for the game to handle
+        for i in range(len(self.doodadDefinitions)):
+            doodadDef = self.doodadDefinitions[i]
+            if doodadDef[1].width() > 1024 or doodadDef[1].height() > 1024:
+                doodadDefList.append(doodadDef[0])
+                dispWarning = True
+
+        # Since some maps *can* have larger doodads and somehow get away with it,
+        # we don't want to just outright delete them. So instead just warn the user.
+        if dispWarning:
+            listStr = "<br>".join(doodadDefList)
+            msg = 'One or more doodads present in the map exceed a size of 1024x1024 pixels. Doodads larger than this are known to cause issues in some cases, ' \
+                  'and may result in the map crashing in-game.<br><br>The following doodads were found to exceed this size:<br>' + listStr
+            QtWidgets.QMessageBox.warning(None, 'Warning', msg)
 
     # LAYERS
     class LayerModel(QtCore.QAbstractListModel):
