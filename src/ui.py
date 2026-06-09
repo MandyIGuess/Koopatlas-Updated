@@ -653,7 +653,6 @@ class KPObjectSelector(QtWidgets.QWidget):
 
         # Borrowed the signals and junk from Reggie, figure we'll need em'
         # Some more signals are set in setTileset
-        self.listView.clicked.connect(self.handleObjReplace)
         self.sorterMenu.aboutToShow.connect(self.fixUpMenuSize)
         self.sorterMenu.triggered.connect(self.toggleTopLevel)
 
@@ -744,16 +743,7 @@ class KPObjectSelector(QtWidgets.QWidget):
 
         self.objChanged.emit(self.tileset.objects.index(object), object)
 
-    def handleObjReplace(self, index):
-        """Throws a signal when the selected object is used as a replacement"""
-        if QtWidgets.QApplication.keyboardModifiers() == QtCore.Qt.AltModifier:
-            i = current.row()
-            object, depth = self.model.groupItem().getItem(i)
-
-            self.objReplaced.emit(self.tileset.objects.index(object), object)
-
     objChanged = QtCore.pyqtSignal(int, KPTileObject)
-    objReplaced = QtCore.pyqtSignal(int, KPTileObject)
 
 
 class KPAnmOptions(QtWidgets.QWidget):
