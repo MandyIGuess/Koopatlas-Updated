@@ -713,7 +713,7 @@ class KPMap(object):
         # we don't want to just outright delete them. So instead just warn the user.
         if dispWarning:
             listStr = "<br>".join(doodadDefList)
-            msg = 'One or more doodads present in the map exceed a size of 1024x1024 pixels. Doodads larger than this are known to cause issues in some cases, ' \
+            msg = 'One or more doodads present in the map exceed a width or height of 1024 pixels of 1024 pixels. Doodads larger than this are known to cause issues in some cases, ' \
                   'and may result in the map crashing in-game.<br><br>The following doodads were found to exceed this size:<br>' + listStr
             QtWidgets.QMessageBox.warning(None, 'Warning', msg)
 
