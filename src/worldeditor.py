@@ -15,6 +15,9 @@ def colourFromNiceStr(thing):
         pass
     return None
 
+def clamp(x, low, high):
+    return min(max(int(x), low), high)
+
 class KPWorldTableModel(QtCore.QAbstractTableModel):
     FIELDS = ('Name', 'World ID', 'Track ID',
             'FS Text 1', 'FS Text 2',
@@ -95,18 +98,18 @@ class KPWorldTableModel(QtCore.QAbstractTableModel):
                     entry.name = str(value)
                     success = True
                 elif col == 1:
-                    entry.worldID = str(value)
+                    entry.worldID = str(clamp(value, 0, 255))
                     success = True
                 elif col == 2:
                     try:
-                        v = int(value)
+                        v = clamp(value, 0, 255)
                         ok = True
                     except ValueError:
                         ok = False
                     if ok:
                         entry.musicTrackID = v
                         success = True
-                elif col >= 3 and col <= 8:
+                elif 3 <= col <= 8:
                     newCol = colourFromNiceStr(str(value))
                     if newCol:
                         success = True
@@ -122,9 +125,14 @@ class KPWorldTableModel(QtCore.QAbstractTableModel):
                             entry.hudTextColours = (newCol, entry.hudTextColours[1])
                         elif col == 8:
                             entry.hudTextColours = (entry.hudTextColours[0], newCol)
-                elif col >= 9 and col <= 11:
+                elif 9 <= col <= 11:
                     try:
-                        v = int(value)
+                        if col == 9:
+                            v = clamp(value, 0, 360)
+                        elif col == 10:
+                            v = clamp(value, 0, 100)
+                        elif col == 11:
+                            v = clamp(value, -50, 50)
                         ok = True
                     except ValueError:
                         ok = False
